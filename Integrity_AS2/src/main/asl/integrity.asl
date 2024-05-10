@@ -7,7 +7,7 @@ integrity(X, W1, W2, D1, I1, D2, I2):- DiscrepancyD is D1 - D2 && DiscrepancyI i
 !innit.
 
 +!innit: perceptionOfIntentions(D1,I1) && perceptionOfPrinciples(D2, I2) && weights(W1, W2) =>
-    #println("Starting integrity check for a specific agent.");
+    #println("Starting integrity check.");
     perceptionOfIntentions(D1, I1);
     perceptionOfPrinciples(D2, I2);
     weights(W1,W2);
