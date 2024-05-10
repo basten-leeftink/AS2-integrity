@@ -1,9 +1,0 @@
-{
-  "agents": [
-    {
-      "name" : "agentX",
-      "script_file" : "agentX.asl",
-      "number": 1
-    }
-  ]
-}
