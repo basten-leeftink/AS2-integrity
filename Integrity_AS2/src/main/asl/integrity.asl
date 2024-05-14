@@ -1,16 +1,12 @@
-weights(0.1, 0.9).  
-perceptionOfPrinciples(0.5, 0.6). 
-perceptionOfIntentions(0.7, 0.8). 
+i(5, 8).
+p(10, 8).
+w(0.1, 0.9).
 
-integrity(X, W1, W2, D1, I1, D2, I2):- DiscrepancyD is D1 - D2 && DiscrepancyI is I1 - I2 && WD is W1 * (DiscrepancyD * DiscrepancyD) && WI is W2 * (DiscrepancyI * DiscrepancyI) && SumW is WD + WI && SumN is Sumw / (W1+W2) && X is 1 - SumW.  
 
-!innit.
+distance(A,I1,I2,P1,P2,W1,W2):- DA is P1 - I1 && DB is P2 - I2 && WQDA is W1 * (DA**2) && WQDB is W2 * (DB * DB) && WQDS is WQDA + WQDB && WQRDS is WQDS ** 0.5 && WQRNDS is WQRDS / (W1 + W2) && A is 1 - WQRNDS .
 
-+!innit: perceptionOfIntentions(D1,I1) && perceptionOfPrinciples(D2, I2) && weights(W1, W2) =>
-    #println("Starting integrity check.");
-    perceptionOfIntentions(D1, I1);
-    perceptionOfPrinciples(D2, I2);
-    weights(W1,W2);
-    integrity(X,W1,W2,D1,I1,D2,I2);
-    #println(X).
+!init(I1,I2,P1,P2,W1,W2).
+
++!init(I1,I2,P1,P2,W1,W2) : i(I1,I2) && p(P1,P2) && w(W1,W2) && distance(A,I1,I2,P1,P2,W1,W2) =>
+    #println(A).
 

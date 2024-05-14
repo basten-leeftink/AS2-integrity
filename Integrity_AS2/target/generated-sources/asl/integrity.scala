@@ -314,7 +314,7 @@ package asl
 
                       def plan0(vars: VarMap)(implicit executionContext: ExecutionContext): Unit = {
 
-                                          PrimitiveAction.execute(PrimitiveAction.Parameters(() => println(StringTerm("System starting integrity check for a specific agent."))))
+                                          PrimitiveAction.execute(PrimitiveAction.Parameters(() => println(StringTerm("Starting integrity check."))))
 
 
                      }
