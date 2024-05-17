@@ -1,12 +1,36 @@
-i(5, 8).
-p(10, 8).
-w(0.1, 0.9).
+agent(tom).
 
+principle(tom, p1, 0.4).
+principle(tom, p2, 0.2).
+principle(tom, p3, 0.9).
 
-distance(A,I1,I2,P1,P2,W1,W2):- DA is P1 - I1 && DB is P2 - I2 && WQDA is W1 * (DA**2) && WQDB is W2 * (DB * DB) && WQDS is WQDA + WQDB && WQRDS is WQDS ** 0.5 && WQRNDS is WQRDS / (W1 + W2) && A is 1 - WQRNDS .
+intention(tom, p1, 0.2).
+intention(tom, p2, 0.2).
+intention(tom, p3, 0.8).
 
-!init(I1,I2,P1,P2,W1,W2).
+weight(tom, p1, 0.7).
+weight(tom, p2, 0.8).
+weight(tom, p3, 0.4).
 
-+!init(I1,I2,P1,P2,W1,W2) : i(I1,I2) && p(P1,P2) && w(W1,W2) && distance(A,I1,I2,P1,P2,W1,W2) =>
-    #println(A).
+sum(0).
 
+!init(tom).
+
++!init(Agent) =>
+    +sum(0);
+    for (X in principle(Agent, X, P)) {
+        !sub(Agent,X);
+    }.
+
++!sub(Agent, X) :
+    principle(Agent, X, P) &&
+    intention(Agent, X, I) &&
+    weight(Agent, X, W) &&
+    sum(CurrentSum) &&
+    D is (((P-I)*W)**2) &&
+    NewSum is CurrentSum + D &&
+    RootOfSum is NewSum ** 0.5=>
+
+    -sum(CurrentSum);
+    +sum(NewSum);
+    #println(NewSum).
