@@ -17,7 +17,7 @@ public class MainMaven {
         system.tell(
                 AgentRequestMessage.apply(
                         toSeq(List.of(
-                                        new AgentRequest(asl.integrity_companion.create(), "integrity", 1)
+                                        new AgentRequest(asl.test_companion.create(), "test", 1)
                                 )
                         ),
                         system
