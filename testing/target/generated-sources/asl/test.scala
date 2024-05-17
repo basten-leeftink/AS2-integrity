@@ -41,8 +41,14 @@ package asl
                    case test.this.adopt_achievement_init_1 =>
                      test.this.adopt_achievement_init_1.execute(message.params.asInstanceOf[Parameters])
 
-                   case test.this.adopt_achievement_sub_2 =>
-                     test.this.adopt_achievement_sub_2.execute(message.params.asInstanceOf[Parameters])
+                   case test.this.adopt_achievement_distanceSum_2 =>
+                     test.this.adopt_achievement_distanceSum_2.execute(message.params.asInstanceOf[Parameters])
+
+                   case test.this.adopt_achievement_distanceWeight_2 =>
+                     test.this.adopt_achievement_distanceWeight_2.execute(message.params.asInstanceOf[Parameters])
+
+                   case test.this.adopt_achievement_normalizedDistance_1 =>
+                     test.this.adopt_achievement_normalizedDistance_1.execute(message.params.asInstanceOf[Parameters])
 
 
            case _ =>
@@ -79,17 +85,25 @@ package asl
          def initBeliefs()(implicit executionContext: ExecutionContext) = List[StructTerm](
                      StructTerm("agent",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]())))
            ,
-            StructTerm("principle",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p1",Seq[GenericTerm]()),DoubleTerm(0.4)))
+            StructTerm("principle",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p1",Seq[GenericTerm]()),IntTerm(1)))
            ,
-            StructTerm("principle",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p2",Seq[GenericTerm]()),DoubleTerm(0.2)))
+            StructTerm("principle",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p2",Seq[GenericTerm]()),IntTerm(1)))
            ,
-            StructTerm("principle",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p3",Seq[GenericTerm]()),DoubleTerm(0.9)))
+            StructTerm("principle",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p3",Seq[GenericTerm]()),IntTerm(1)))
            ,
-            StructTerm("intention",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p1",Seq[GenericTerm]()),DoubleTerm(0.2)))
+            StructTerm("principle",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p4",Seq[GenericTerm]()),IntTerm(1)))
            ,
-            StructTerm("intention",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p2",Seq[GenericTerm]()),DoubleTerm(0.2)))
+            StructTerm("principle",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p5",Seq[GenericTerm]()),IntTerm(1)))
            ,
-            StructTerm("intention",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p3",Seq[GenericTerm]()),DoubleTerm(0.8)))
+            StructTerm("intention",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p1",Seq[GenericTerm]()),IntTerm(1)))
+           ,
+            StructTerm("intention",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p2",Seq[GenericTerm]()),IntTerm(1)))
+           ,
+            StructTerm("intention",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p3",Seq[GenericTerm]()),IntTerm(1)))
+           ,
+            StructTerm("intention",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p4",Seq[GenericTerm]()),IntTerm(1)))
+           ,
+            StructTerm("intention",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p5",Seq[GenericTerm]()),IntTerm(1)))
            ,
             StructTerm("weight",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p1",Seq[GenericTerm]()),DoubleTerm(0.7)))
            ,
@@ -97,7 +111,13 @@ package asl
            ,
             StructTerm("weight",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p3",Seq[GenericTerm]()),DoubleTerm(0.4)))
            ,
+            StructTerm("weight",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p4",Seq[GenericTerm]()),DoubleTerm(0.4)))
+           ,
+            StructTerm("weight",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p5",Seq[GenericTerm]()),DoubleTerm(0.4)))
+           ,
             StructTerm("sum",Seq[GenericTerm](IntTerm(0)))
+           ,
+            StructTerm("weightSum",Seq[GenericTerm](IntTerm(0)))
 
 
          )
@@ -262,9 +282,17 @@ package asl
                                      val args: Parameters = Parameters(t.terms.toList)
                                      Option(SubGoalMessage(adopt_achievement_init_1, args, ref))
                                    } else  
-                                   if(t.matchOnlyFunctorAndArity("sub",2)) {
+                                   if(t.matchOnlyFunctorAndArity("distanceSum",2)) {
                                      val args: Parameters = Parameters(t.terms.toList)
-                                     Option(SubGoalMessage(adopt_achievement_sub_2, args, ref))
+                                     Option(SubGoalMessage(adopt_achievement_distanceSum_2, args, ref))
+                                   } else  
+                                   if(t.matchOnlyFunctorAndArity("distanceWeight",2)) {
+                                     val args: Parameters = Parameters(t.terms.toList)
+                                     Option(SubGoalMessage(adopt_achievement_distanceWeight_2, args, ref))
+                                   } else  
+                                   if(t.matchOnlyFunctorAndArity("normalizedDistance",1)) {
+                                     val args: Parameters = Parameters(t.terms.toList)
+                                     Option(SubGoalMessage(adopt_achievement_normalizedDistance_1, args, ref))
                                    } else   {
                     Option.empty[SubGoalMessage]
                     }
@@ -272,19 +300,19 @@ package asl
                 }
 
         override def create_belief_message(t: StructTerm, ref: IMessageSource) (implicit executionContext: ExecutionContext): Option[SubGoalMessage] = {
-                     {
+                       {
                     Option.empty[SubGoalMessage]
                     }
 
                 }
 
          override def create_test_message(t: StructTerm, ref: IMessageSource) (implicit executionContext: ExecutionContext): Option[SubGoalMessage] = {
-                             {
+                               {
                             Option.empty[SubGoalMessage]
                             }
                         }
           override def create_unbelief_message(t: StructTerm, ref: IMessageSource) (implicit executionContext: ExecutionContext): Option[SubGoalMessage] = {
-                                      {
+                                        {
                                      Option.empty[SubGoalMessage]
                                      }
                                  }
@@ -328,17 +356,27 @@ package asl
 
                       def plan0(vars: VarMap)(implicit executionContext: ExecutionContext): Unit = {
 
-                                           BeliefUpdateAction.execute(BeliefUpdateAction.Parameters("+", StructTerm("sum",Seq[GenericTerm](IntTerm(0)))),GoalParser)
-                                               val ex_L66315 = executionContext.beliefBase.bufferedQuery( StructTerm("principle",Seq[GenericTerm](vars("Agent"),vars("L66315"),vars("P"))) )
-                                               while (ex_L66315.hasNext) {
-                                                   val sol_L66315 = ex_L66315.next
-                                                   if(sol_L66315.result) {
-                                                   vars += ("X" -> sol_L66315.bindings("L66315").asInstanceOf[GenericTerm])
-                                                                       adopt_achievement_sub_2.execute(Parameters(List( vars("Agent") , vars("X")  )))
+                                               val ex_L92583 = executionContext.beliefBase.bufferedQuery( StructTerm("principle",Seq[GenericTerm](vars("Agent"),vars("L92583"),vars("P"))) )
+                                               while (ex_L92583.hasNext) {
+                                                   val sol_L92583 = ex_L92583.next
+                                                   if(sol_L92583.result) {
+                                                   vars += ("X" -> sol_L92583.bindings("L92583").asInstanceOf[GenericTerm])
+                                                                       adopt_achievement_distanceSum_2.execute(Parameters(List( vars("Agent") , vars("X")  )))
 
                                                    }
                                                }
                                            vars -= ("X")
+                                               val ex_L68776 = executionContext.beliefBase.bufferedQuery( StructTerm("weight",Seq[GenericTerm](vars("Agent"),vars("X"),vars("L68776"))) )
+                                               while (ex_L68776.hasNext) {
+                                                   val sol_L68776 = ex_L68776.next
+                                                   if(sol_L68776.result) {
+                                                   vars += ("W" -> sol_L68776.bindings("L68776").asInstanceOf[GenericTerm])
+                                                                       adopt_achievement_distanceWeight_2.execute(Parameters(List( vars("Agent") , vars("W")  )))
+
+                                                   }
+                                               }
+                                           vars -= ("W")
+                                          adopt_achievement_normalizedDistance_1.execute(Parameters(List( vars("Agent")  )))
 
 
                      }
@@ -346,7 +384,7 @@ package asl
 
       }
 
-      object adopt_achievement_sub_2 extends IGoal {
+      object adopt_achievement_distanceSum_2 extends IGoal {
 
         def execute(params: Parameters) (implicit executionContext: ExecutionContext) : Unit = {
          var vars = VarMap()
@@ -369,7 +407,7 @@ package asl
                          vars +=(   "Agent" -> params.l_params(0))
                           vars +=(   "X" -> params.l_params(1))
 
-                         val r0 = executionContext.beliefBase.query(StructTerm(",",Seq[GenericTerm](StructTerm(",",Seq[GenericTerm](StructTerm(",",Seq[GenericTerm](StructTerm(",",Seq[GenericTerm](StructTerm(",",Seq[GenericTerm](StructTerm(",",Seq[GenericTerm](StructTerm("principle",Seq[GenericTerm](vars("Agent"),vars("X"),vars("P"))),StructTerm("intention",Seq[GenericTerm](vars("Agent"),vars("X"),vars("I"))))),StructTerm("weight",Seq[GenericTerm](vars("Agent"),vars("X"),vars("W"))))),StructTerm("sum",Seq[GenericTerm](vars("CurrentSum"))))),StructTerm("is",Seq[GenericTerm](vars("D"),StructTerm("**",Seq[GenericTerm](StructTerm("*",Seq[GenericTerm](StructTerm("-",Seq[GenericTerm](vars("P"),vars("I"))),vars("W"))),IntTerm(2))))))),StructTerm("is",Seq[GenericTerm](vars("NewSum"),StructTerm("+",Seq[GenericTerm](vars("CurrentSum"),vars("D"))))))),StructTerm("is",Seq[GenericTerm](vars("RootOfSum"),StructTerm("**",Seq[GenericTerm](vars("NewSum"),DoubleTerm(0.5))))))))
+                         val r0 = executionContext.beliefBase.query(StructTerm(",",Seq[GenericTerm](StructTerm(",",Seq[GenericTerm](StructTerm(",",Seq[GenericTerm](StructTerm(",",Seq[GenericTerm](StructTerm(",",Seq[GenericTerm](StructTerm("principle",Seq[GenericTerm](vars("Agent"),vars("X"),vars("P"))),StructTerm("intention",Seq[GenericTerm](vars("Agent"),vars("X"),vars("I"))))),StructTerm("weight",Seq[GenericTerm](vars("Agent"),vars("X"),vars("W"))))),StructTerm("sum",Seq[GenericTerm](vars("CurrentSum"))))),StructTerm("is",Seq[GenericTerm](vars("D"),StructTerm("*",Seq[GenericTerm](vars("W"),StructTerm("**",Seq[GenericTerm](StructTerm("-",Seq[GenericTerm](vars("P"),vars("I"))),IntTerm(2))))))))),StructTerm("is",Seq[GenericTerm](vars("NewSum"),StructTerm("+",Seq[GenericTerm](vars("CurrentSum"),vars("D"))))))))
 
                          if (r0.result) {
                              r0.bindings foreach { case (k, v) =>
@@ -392,8 +430,110 @@ package asl
 
                                            BeliefUpdateAction.execute(BeliefUpdateAction.Parameters("-", StructTerm("sum",Seq[GenericTerm](vars("CurrentSum")))),GoalParser)
                                            BeliefUpdateAction.execute(BeliefUpdateAction.Parameters("+", StructTerm("sum",Seq[GenericTerm](vars("NewSum")))),GoalParser)
-                                          PrimitiveAction.execute(PrimitiveAction.Parameters(() => println(vars("NewSum"))))
-                                          PrimitiveAction.execute(PrimitiveAction.Parameters(() => println( (IntTerm(798789) UNIDENTIFIED_OPERATOR: ** DoubleTerm(0.5)) )))
+
+
+                     }
+
+
+      }
+
+      object adopt_achievement_distanceWeight_2 extends IGoal {
+
+        def execute(params: Parameters) (implicit executionContext: ExecutionContext) : Unit = {
+         var vars = VarMap()
+
+         vars("Self").bind_to(StringTerm(executionContext.name))
+         vars("Source").bind_to(StringTerm(executionContext.src.name))
+         vars("Parent").bind_to(StringTerm(executionContext.parent.name))
+
+
+
+
+
+
+                 //plan 0 start
+
+                         vars.clear()
+                         vars("Self").bind_to(StringTerm(executionContext.name))
+                         vars("Source").bind_to(StringTerm(executionContext.src.name))
+                         vars("Parent").bind_to(StringTerm(executionContext.parent.name))
+                         vars +=(   "Agent" -> params.l_params(0))
+                          vars +=(   "W" -> params.l_params(1))
+
+                         val r0 = executionContext.beliefBase.query(StructTerm(",",Seq[GenericTerm](StructTerm("weightSum",Seq[GenericTerm](vars("CurrentSumWeight"))),StructTerm("is",Seq[GenericTerm](vars("NewSumWeight"),StructTerm("+",Seq[GenericTerm](vars("CurrentSumWeight"),vars("W"))))))))
+
+                         if (r0.result) {
+                             r0.bindings foreach { case (k, v) =>
+                            // vars += (k -> v.asInstanceOf[GenericTerm])
+                                      vars(k).bind_to(v)
+                             }
+                             plan0(vars)
+                             return
+                          }
+
+                          // plan 0 end
+
+
+             executionContext.src.asInstanceOf[AkkaMessageSource].address() ! IntentionErrorMessage(NoApplicablePlanMessage(),AkkaMessageSource(executionContext.agent.self))
+
+        }
+
+
+                      def plan0(vars: VarMap)(implicit executionContext: ExecutionContext): Unit = {
+
+                                           BeliefUpdateAction.execute(BeliefUpdateAction.Parameters("-", StructTerm("weightSum",Seq[GenericTerm](vars("CurrentSumWeight")))),GoalParser)
+                                           BeliefUpdateAction.execute(BeliefUpdateAction.Parameters("+", StructTerm("weightSum",Seq[GenericTerm](vars("NewSumWeight")))),GoalParser)
+
+
+                     }
+
+
+      }
+
+      object adopt_achievement_normalizedDistance_1 extends IGoal {
+
+        def execute(params: Parameters) (implicit executionContext: ExecutionContext) : Unit = {
+         var vars = VarMap()
+
+         vars("Self").bind_to(StringTerm(executionContext.name))
+         vars("Source").bind_to(StringTerm(executionContext.src.name))
+         vars("Parent").bind_to(StringTerm(executionContext.parent.name))
+
+
+
+
+
+
+                 //plan 0 start
+
+                         vars.clear()
+                         vars("Self").bind_to(StringTerm(executionContext.name))
+                         vars("Source").bind_to(StringTerm(executionContext.src.name))
+                         vars("Parent").bind_to(StringTerm(executionContext.parent.name))
+                         vars +=(   "Agent" -> params.l_params(0))
+
+                         val r0 = executionContext.beliefBase.query(StructTerm(",",Seq[GenericTerm](StructTerm("sum",Seq[GenericTerm](vars("Xtest"))),StructTerm("weightSum",Seq[GenericTerm](vars("Ytest"))))))
+
+                         if (r0.result) {
+                             r0.bindings foreach { case (k, v) =>
+                            // vars += (k -> v.asInstanceOf[GenericTerm])
+                                      vars(k).bind_to(v)
+                             }
+                             plan0(vars)
+                             return
+                          }
+
+                          // plan 0 end
+
+
+             executionContext.src.asInstanceOf[AkkaMessageSource].address() ! IntentionErrorMessage(NoApplicablePlanMessage(),AkkaMessageSource(executionContext.agent.self))
+
+        }
+
+
+                      def plan0(vars: VarMap)(implicit executionContext: ExecutionContext): Unit = {
+
+                                          PrimitiveAction.execute(PrimitiveAction.Parameters(() => println( ( ( (StringTerm("The perceived integrity of ") + vars("Agent"))  + StringTerm(" is: "))  +  (IntTerm(1) -  (vars("Xtest") / vars("Ytest")) ) ) )))
 
 
                      }
