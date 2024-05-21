@@ -1,37 +1,65 @@
 agent(tom).
+agent(paula).
 
+// Belief-base Paula 
+principle(paula, p1, 0).
+principle(paula, p2, 0).
+principle(paula, p3, 0).
+principle(paula, p4, 0).
+principle(paula, p5, 0).
+
+intention(paula, p1, 0.6).
+intention(paula, p2, 0.9).
+intention(paula, p3, 0.4).
+intention(paula, p4, 0.9).
+intention(paula, p5, 0.2).
+
+weight(paula, p1, 0.7).
+weight(paula, p2, 0.8).
+weight(paula, p3, 0.4).
+weight(paula, p4, 0.4).
+weight(paula, p5, 0.4).
+
+
+// Belief-base Tom
 principle(tom, p1, 0.8).
-principle(tom, p2, 0.7).
+principle(tom, p2, 0.2).
 principle(tom, p3, 0.6).
 principle(tom, p4, 0.4).
 principle(tom, p5, 0.2).
 
-intention(tom, p1, 0.4).
+intention(tom, p1, 0.6).
 intention(tom, p2, 0.1).
 intention(tom, p3, 0.4).
 intention(tom, p4, 0.2).
 intention(tom, p5, 0.2).
 
-weight(tom, p1, 0.9).
+weight(tom, p1, 0.7).
 weight(tom, p2, 0.8).
 weight(tom, p3, 0.4).
 weight(tom, p4, 0.4).
 weight(tom, p5, 0.4).
 
+
 sum(0).
 weightSum(0).
+threshold(0.8).
 
-!init(tom).
+!getnames().
+
++!getnames() =>
+    for (Name in agent(Name)) {
+        !init(Name);
+    }.
+
 
 +!init(Agent) =>
     for (X in principle(Agent, X, P)) {
         !distanceSum(Agent,X);
     };
-
     for (W in weight(Agent, X, W)) {
         !distanceWeight(Agent,W);
     };
-    
     !normalizedDistance(Agent).
 
 +!distanceSum(Agent, X) :
@@ -54,6 +82,11 @@ weightSum(0).
     +weightSum(NewSumWeight).
 
 +!normalizedDistance(Agent) :
-    sum(WeightedDistance) &&
-    weightSum(DMax) => 
-    #println("The perceived integrity of " + Agent + " is: " + (1 - (WeightedDistance / DMax))).
+    sum(Xtest) &&
+    threshold(T) &&
+    weightSum(Ytest) => 
+    if (1 -(Xtest / Ytest) > T) {
+        #println("The perceived integrity of " + Agent + " is: " + (1 -(Xtest / Ytest))+ ". And is thus integer.");
+    } else {
+        #println("The perceived integrity of " + Agent + " is: " + (1 -(Xtest / Ytest))+ ". And is thus not integer.");
+    }.
