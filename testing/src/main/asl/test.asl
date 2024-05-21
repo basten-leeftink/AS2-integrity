@@ -14,12 +14,6 @@ intention(paula, p3, 0.4).
 intention(paula, p4, 0.9).
 intention(paula, p5, 0.2).
 
-weight(paula, p1, 0.7).
-weight(paula, p2, 0.8).
-weight(paula, p3, 0.4).
-weight(paula, p4, 0.4).
-weight(paula, p5, 0.4).
-
 
 // Belief-base Tom
 principle(tom, p1, 0.8).
@@ -34,11 +28,12 @@ intention(tom, p3, 0.4).
 intention(tom, p4, 0.2).
 intention(tom, p5, 0.2).
 
-weight(tom, p1, 0.7).
-weight(tom, p2, 0.8).
-weight(tom, p3, 0.4).
-weight(tom, p4, 0.4).
-weight(tom, p5, 0.4).
+// How important are the principles?
+weight(p1, 0.7).
+weight(p2, 0.8).
+weight(p3, 0.4).
+weight(p4, 0.4).
+weight(p5, 0.4).
 
 
 sum(0).
@@ -57,7 +52,7 @@ threshold(0.8).
     for (X in principle(Agent, X, P)) {
         !distanceSum(Agent,X);
     };
-    for (W in weight(Agent, X, W)) {
+    for (W in weight(X, W)) {
         !distanceWeight(Agent,W);
     };
     !normalizedDistance(Agent).
@@ -65,7 +60,7 @@ threshold(0.8).
 +!distanceSum(Agent, X) :
     principle(Agent, X, P) &&
     intention(Agent, X, I) &&
-    weight(Agent, X, W) &&
+    weight(X, W) &&
     sum(CurrentSum) &&
     D is W*(((P-I))**2) &&
     NewSum is CurrentSum + D =>

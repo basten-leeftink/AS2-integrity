@@ -110,16 +110,6 @@ package asl
            ,
             StructTerm("intention",Seq[GenericTerm](StructTerm("paula",Seq[GenericTerm]()),StructTerm("p5",Seq[GenericTerm]()),DoubleTerm(0.2)))
            ,
-            StructTerm("weight",Seq[GenericTerm](StructTerm("paula",Seq[GenericTerm]()),StructTerm("p1",Seq[GenericTerm]()),DoubleTerm(0.7)))
-           ,
-            StructTerm("weight",Seq[GenericTerm](StructTerm("paula",Seq[GenericTerm]()),StructTerm("p2",Seq[GenericTerm]()),DoubleTerm(0.8)))
-           ,
-            StructTerm("weight",Seq[GenericTerm](StructTerm("paula",Seq[GenericTerm]()),StructTerm("p3",Seq[GenericTerm]()),DoubleTerm(0.4)))
-           ,
-            StructTerm("weight",Seq[GenericTerm](StructTerm("paula",Seq[GenericTerm]()),StructTerm("p4",Seq[GenericTerm]()),DoubleTerm(0.4)))
-           ,
-            StructTerm("weight",Seq[GenericTerm](StructTerm("paula",Seq[GenericTerm]()),StructTerm("p5",Seq[GenericTerm]()),DoubleTerm(0.4)))
-           ,
             StructTerm("principle",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p1",Seq[GenericTerm]()),DoubleTerm(0.8)))
            ,
             StructTerm("principle",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p2",Seq[GenericTerm]()),DoubleTerm(0.2)))
@@ -140,15 +130,15 @@ package asl
            ,
             StructTerm("intention",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p5",Seq[GenericTerm]()),DoubleTerm(0.2)))
            ,
-            StructTerm("weight",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p1",Seq[GenericTerm]()),DoubleTerm(0.7)))
+            StructTerm("weight",Seq[GenericTerm](StructTerm("p1",Seq[GenericTerm]()),DoubleTerm(0.7)))
            ,
-            StructTerm("weight",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p2",Seq[GenericTerm]()),DoubleTerm(0.8)))
+            StructTerm("weight",Seq[GenericTerm](StructTerm("p2",Seq[GenericTerm]()),DoubleTerm(0.8)))
            ,
-            StructTerm("weight",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p3",Seq[GenericTerm]()),DoubleTerm(0.4)))
+            StructTerm("weight",Seq[GenericTerm](StructTerm("p3",Seq[GenericTerm]()),DoubleTerm(0.4)))
            ,
-            StructTerm("weight",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p4",Seq[GenericTerm]()),DoubleTerm(0.4)))
+            StructTerm("weight",Seq[GenericTerm](StructTerm("p4",Seq[GenericTerm]()),DoubleTerm(0.4)))
            ,
-            StructTerm("weight",Seq[GenericTerm](StructTerm("tom",Seq[GenericTerm]()),StructTerm("p5",Seq[GenericTerm]()),DoubleTerm(0.4)))
+            StructTerm("weight",Seq[GenericTerm](StructTerm("p5",Seq[GenericTerm]()),DoubleTerm(0.4)))
            ,
             StructTerm("sum",Seq[GenericTerm](IntTerm(0)))
            ,
@@ -395,11 +385,11 @@ package asl
 
                       def plan0(vars: VarMap)(implicit executionContext: ExecutionContext): Unit = {
 
-                                               val ex_L98194 = executionContext.beliefBase.bufferedQuery( StructTerm("agent",Seq[GenericTerm](vars("L98194"))) )
-                                               while (ex_L98194.hasNext) {
-                                                   val sol_L98194 = ex_L98194.next
-                                                   if(sol_L98194.result) {
-                                                   vars += ("Name" -> sol_L98194.bindings("L98194").asInstanceOf[GenericTerm])
+                                               val ex_L88564 = executionContext.beliefBase.bufferedQuery( StructTerm("agent",Seq[GenericTerm](vars("L88564"))) )
+                                               while (ex_L88564.hasNext) {
+                                                   val sol_L88564 = ex_L88564.next
+                                                   if(sol_L88564.result) {
+                                                   vars += ("Name" -> sol_L88564.bindings("L88564").asInstanceOf[GenericTerm])
                                                                        adopt_achievement_init_1.execute(Parameters(List( vars("Name")  )))
 
                                                    }
@@ -446,21 +436,21 @@ package asl
 
                       def plan0(vars: VarMap)(implicit executionContext: ExecutionContext): Unit = {
 
-                                               val ex_L32906 = executionContext.beliefBase.bufferedQuery( StructTerm("principle",Seq[GenericTerm](vars("Agent"),vars("L32906"),vars("P"))) )
-                                               while (ex_L32906.hasNext) {
-                                                   val sol_L32906 = ex_L32906.next
-                                                   if(sol_L32906.result) {
-                                                   vars += ("X" -> sol_L32906.bindings("L32906").asInstanceOf[GenericTerm])
+                                               val ex_L28066 = executionContext.beliefBase.bufferedQuery( StructTerm("principle",Seq[GenericTerm](vars("Agent"),vars("L28066"),vars("P"))) )
+                                               while (ex_L28066.hasNext) {
+                                                   val sol_L28066 = ex_L28066.next
+                                                   if(sol_L28066.result) {
+                                                   vars += ("X" -> sol_L28066.bindings("L28066").asInstanceOf[GenericTerm])
                                                                        adopt_achievement_distanceSum_2.execute(Parameters(List( vars("Agent") , vars("X")  )))
 
                                                    }
                                                }
                                            vars -= ("X")
-                                               val ex_L72641 = executionContext.beliefBase.bufferedQuery( StructTerm("weight",Seq[GenericTerm](vars("Agent"),vars("X"),vars("L72641"))) )
-                                               while (ex_L72641.hasNext) {
-                                                   val sol_L72641 = ex_L72641.next
-                                                   if(sol_L72641.result) {
-                                                   vars += ("W" -> sol_L72641.bindings("L72641").asInstanceOf[GenericTerm])
+                                               val ex_L60478 = executionContext.beliefBase.bufferedQuery( StructTerm("weight",Seq[GenericTerm](vars("X"),vars("L60478"))) )
+                                               while (ex_L60478.hasNext) {
+                                                   val sol_L60478 = ex_L60478.next
+                                                   if(sol_L60478.result) {
+                                                   vars += ("W" -> sol_L60478.bindings("L60478").asInstanceOf[GenericTerm])
                                                                        adopt_achievement_distanceWeight_2.execute(Parameters(List( vars("Agent") , vars("W")  )))
 
                                                    }
@@ -497,7 +487,7 @@ package asl
                          vars +=(   "Agent" -> params.l_params(0))
                           vars +=(   "X" -> params.l_params(1))
 
-                         val r0 = executionContext.beliefBase.query(StructTerm(",",Seq[GenericTerm](StructTerm(",",Seq[GenericTerm](StructTerm(",",Seq[GenericTerm](StructTerm(",",Seq[GenericTerm](StructTerm(",",Seq[GenericTerm](StructTerm("principle",Seq[GenericTerm](vars("Agent"),vars("X"),vars("P"))),StructTerm("intention",Seq[GenericTerm](vars("Agent"),vars("X"),vars("I"))))),StructTerm("weight",Seq[GenericTerm](vars("Agent"),vars("X"),vars("W"))))),StructTerm("sum",Seq[GenericTerm](vars("CurrentSum"))))),StructTerm("is",Seq[GenericTerm](vars("D"),StructTerm("*",Seq[GenericTerm](vars("W"),StructTerm("**",Seq[GenericTerm](StructTerm("-",Seq[GenericTerm](vars("P"),vars("I"))),IntTerm(2))))))))),StructTerm("is",Seq[GenericTerm](vars("NewSum"),StructTerm("+",Seq[GenericTerm](vars("CurrentSum"),vars("D"))))))))
+                         val r0 = executionContext.beliefBase.query(StructTerm(",",Seq[GenericTerm](StructTerm(",",Seq[GenericTerm](StructTerm(",",Seq[GenericTerm](StructTerm(",",Seq[GenericTerm](StructTerm(",",Seq[GenericTerm](StructTerm("principle",Seq[GenericTerm](vars("Agent"),vars("X"),vars("P"))),StructTerm("intention",Seq[GenericTerm](vars("Agent"),vars("X"),vars("I"))))),StructTerm("weight",Seq[GenericTerm](vars("X"),vars("W"))))),StructTerm("sum",Seq[GenericTerm](vars("CurrentSum"))))),StructTerm("is",Seq[GenericTerm](vars("D"),StructTerm("*",Seq[GenericTerm](vars("W"),StructTerm("**",Seq[GenericTerm](StructTerm("-",Seq[GenericTerm](vars("P"),vars("I"))),IntTerm(2))))))))),StructTerm("is",Seq[GenericTerm](vars("NewSum"),StructTerm("+",Seq[GenericTerm](vars("CurrentSum"),vars("D"))))))))
 
                          if (r0.result) {
                              r0.bindings foreach { case (k, v) =>
@@ -624,11 +614,11 @@ package asl
                       def plan0(vars: VarMap)(implicit executionContext: ExecutionContext): Unit = {
 
                                           if(( ( (IntTerm(1) -  (vars("Xtest") / vars("Ytest")) )  > vars("T")) ).holds) {
-                                                                  PrimitiveAction.execute(PrimitiveAction.Parameters(() => println( ( ( ( (StringTerm("The perceived integrity of ") + vars("Agent"))  + StringTerm(" is: "))  +  (IntTerm(1) -  (vars("Xtest") / vars("Ytest")) ) )  + StringTerm(". And is thus integer")) )))
+                                                                  PrimitiveAction.execute(PrimitiveAction.Parameters(() => println( ( ( ( (StringTerm("The perceived integrity of ") + vars("Agent"))  + StringTerm(" is: "))  +  (IntTerm(1) -  (vars("Xtest") / vars("Ytest")) ) )  + StringTerm(". And is thus integer.")) )))
 
                                           }
                                            else {
-                                                                  PrimitiveAction.execute(PrimitiveAction.Parameters(() => println( ( ( ( (StringTerm("The perceived integrity of ") + vars("Agent"))  + StringTerm(" is: "))  +  (IntTerm(1) -  (vars("Xtest") / vars("Ytest")) ) )  + StringTerm(". And is thus not integer")) )))
+                                                                  PrimitiveAction.execute(PrimitiveAction.Parameters(() => println( ( ( ( (StringTerm("The perceived integrity of ") + vars("Agent"))  + StringTerm(" is: "))  +  (IntTerm(1) -  (vars("Xtest") / vars("Ytest")) ) )  + StringTerm(". And is thus not integer.")) )))
 
                                            }
 
