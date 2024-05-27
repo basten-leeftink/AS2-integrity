@@ -69,6 +69,7 @@ threshold(0.8).
     D is W*(((P-I))**2) &&
     NewSum is CurrentSum + D =>
 
+    // Updating sum in belief-base
     -sum(CurrentSum);
     +sum(NewSum);
 
@@ -77,6 +78,7 @@ threshold(0.8).
     weightSum(CurrentSumWeight) &&
     NewSumWeight is CurrentSumWeight + W =>
 
+    // Updating sum in belief-base
     -weightSum(CurrentSumWeight);
     +weightSum(NewSumWeight).
 
@@ -86,6 +88,7 @@ threshold(0.8).
     threshold(T) &&
     weightSum(Dmax) => 
 
+    // Taking square root and invert distance 
     Alpha = (1 - (#nl.uva.sqrt.RootCalculator.calculateRoot(Dw,2) / #nl.uva.sqrt.RootCalculator.calculateRoot(Dmax,2)));
 
     if (Alpha > T) {
@@ -94,6 +97,7 @@ threshold(0.8).
         #println("The perceived integrity of " + Agent + " is: " + Alpha + ". And is thus not integer.");
     };
 
+    // Resetting belief base
     -sum(X);
     -weightSum(Dmax);
     +sum(0.0);
