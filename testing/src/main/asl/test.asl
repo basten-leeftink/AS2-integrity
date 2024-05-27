@@ -44,13 +44,13 @@ threshold(0.8).
 // Initialize program 
 !getnames().
 
-// Loop through all the agents
+// Looping through all the agents
 +!getnames() =>
     for (Name in agent(Name)) {
         !init(Name);
     }.
 
-// Loop through principles 
+// Looping through principles 
 +!init(Agent) =>
     for (X in principle(Agent, X, P)) {
         !distanceSum(Agent,X);

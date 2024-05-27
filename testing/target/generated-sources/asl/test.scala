@@ -385,11 +385,11 @@ package asl
 
                       def plan0(vars: VarMap)(implicit executionContext: ExecutionContext): Unit = {
 
-                                               val ex_L20445 = executionContext.beliefBase.bufferedQuery( StructTerm("agent",Seq[GenericTerm](vars("L20445"))) )
-                                               while (ex_L20445.hasNext) {
-                                                   val sol_L20445 = ex_L20445.next
-                                                   if(sol_L20445.result) {
-                                                   vars += ("Name" -> sol_L20445.bindings("L20445").asInstanceOf[GenericTerm])
+                                               val ex_L86901 = executionContext.beliefBase.bufferedQuery( StructTerm("agent",Seq[GenericTerm](vars("L86901"))) )
+                                               while (ex_L86901.hasNext) {
+                                                   val sol_L86901 = ex_L86901.next
+                                                   if(sol_L86901.result) {
+                                                   vars += ("Name" -> sol_L86901.bindings("L86901").asInstanceOf[GenericTerm])
                                                                        adopt_achievement_init_1.execute(Parameters(List( vars("Name")  )))
 
                                                    }
@@ -436,21 +436,21 @@ package asl
 
                       def plan0(vars: VarMap)(implicit executionContext: ExecutionContext): Unit = {
 
-                                               val ex_L24834 = executionContext.beliefBase.bufferedQuery( StructTerm("principle",Seq[GenericTerm](vars("Agent"),vars("L24834"),vars("P"))) )
-                                               while (ex_L24834.hasNext) {
-                                                   val sol_L24834 = ex_L24834.next
-                                                   if(sol_L24834.result) {
-                                                   vars += ("X" -> sol_L24834.bindings("L24834").asInstanceOf[GenericTerm])
+                                               val ex_L99806 = executionContext.beliefBase.bufferedQuery( StructTerm("principle",Seq[GenericTerm](vars("Agent"),vars("L99806"),vars("P"))) )
+                                               while (ex_L99806.hasNext) {
+                                                   val sol_L99806 = ex_L99806.next
+                                                   if(sol_L99806.result) {
+                                                   vars += ("X" -> sol_L99806.bindings("L99806").asInstanceOf[GenericTerm])
                                                                        adopt_achievement_distanceSum_2.execute(Parameters(List( vars("Agent") , vars("X")  )))
 
                                                    }
                                                }
                                            vars -= ("X")
-                                               val ex_L79185 = executionContext.beliefBase.bufferedQuery( StructTerm("weight",Seq[GenericTerm](vars("X"),vars("L79185"))) )
-                                               while (ex_L79185.hasNext) {
-                                                   val sol_L79185 = ex_L79185.next
-                                                   if(sol_L79185.result) {
-                                                   vars += ("W" -> sol_L79185.bindings("L79185").asInstanceOf[GenericTerm])
+                                               val ex_L509 = executionContext.beliefBase.bufferedQuery( StructTerm("weight",Seq[GenericTerm](vars("X"),vars("L509"))) )
+                                               while (ex_L509.hasNext) {
+                                                   val sol_L509 = ex_L509.next
+                                                   if(sol_L509.result) {
+                                                   vars += ("W" -> sol_L509.bindings("L509").asInstanceOf[GenericTerm])
                                                                        adopt_achievement_distanceWeight_2.execute(Parameters(List( vars("Agent") , vars("W")  )))
 
                                                    }
