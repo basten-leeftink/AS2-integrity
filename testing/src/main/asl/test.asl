@@ -1,3 +1,4 @@
+// Initialize agents
 agent(tom).
 agent(paula).
 
@@ -35,11 +36,12 @@ weight(p3, 0.4).
 weight(p4, 0.4).
 weight(p5, 0.4).
 
-
-sum(0).
-weightSum(0).
+// Initializing variables 
+sum(0.0).
+weightSum(0.0).
 threshold(0.8).
 
+// Initialize program 
 !getnames().
 
 // Loop through all the agents
@@ -68,7 +70,7 @@ threshold(0.8).
     NewSum is CurrentSum + D =>
 
     -sum(CurrentSum);
-    +sum(NewSum).
+    +sum(NewSum);
 
 // Calculate sum of weights 
 +!distanceWeight(Agent, W):
@@ -80,15 +82,19 @@ threshold(0.8).
 
 // Calculate normalized distance 
 +!normalizedDistance(Agent) :
-    sum(Xtest) &&
+    sum(Dw) &&
     threshold(T) &&
-    weightSum(Ytest) => 
-    if (1 -(Xtest / Ytest) > T) {
-        #println("The perceived integrity of " + Agent + " is: " + (1 -(Xtest / Ytest))+ ". And is thus integer.");
+    weightSum(Dmax) => 
+
+    Alpha = (1 - (#nl.uva.sqrt.RootCalculator.calculateRoot(Dw,2) / #nl.uva.sqrt.RootCalculator.calculateRoot(Dmax,2)));
+
+    if (Alpha > T) {
+        #println("The perceived integrity of " + Agent + " is: " + Alpha + ". And is thus integer.");
     } else {
-        #println("The perceived integrity of " + Agent + " is: " + (1 -(Xtest / Ytest))+ ". And is thus not integer.");
+        #println("The perceived integrity of " + Agent + " is: " + Alpha + ". And is thus not integer.");
     };
+
     -sum(X);
-    -weightSum(Ytest);
-    +sum(0);
-    +weightSum(0).
+    -weightSum(Dmax);
+    +sum(0.0);
+    +weightSum(0.0).
