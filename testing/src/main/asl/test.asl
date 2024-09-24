@@ -1,45 +1,28 @@
 // Initialize agents
-agent(tom).
 agent(paula).
+agent(tom).
+
 
 // Belief-base Paula 
-principle(paula, p1, 0).
-principle(paula, p2, 0.2).
-principle(paula, p3, 0).
-principle(paula, p4, 0).
-principle(paula, p5, 0.2).
+principle(paula, honisty, 0.72).
+principle(paula, promiseKeeping, 0.44).
 
-intention(paula, p1, 0.5).
-intention(paula, p2, 0.6).
-intention(paula, p3, 0.7).
-intention(paula, p4, 0.6).
-intention(paula, p5, 0.5).
+intention(paula, honisty, 0.38).
+intention(paula, promiseKeeping, 0.28).
 
 
 // Belief-base Tom
-principle(tom, p1, 0.8).
-principle(tom, p2, 0.2).
-principle(tom, p3, 0.6).
-principle(tom, p4, 0.4).
-principle(tom, p5, 0.2).
+principle(tom, honisty, 0.72).
+principle(tom, promiseKeeping, 0.44).
 
-intention(tom, p1, 0.6).
-intention(tom, p2, 0.1).
-intention(tom, p3, 0.4).
-intention(tom, p4, 0.2).
-intention(tom, p5, 0.2).
+intention(tom, honisty, 0.68).
+intention(tom, promiseKeeping, 0.42).
 
-// How important are the principles?
-weight(p1, 0.7).
-weight(p2, 0.8).
-weight(p3, 0.4).
-weight(p4, 0.4).
-weight(p5, 0.4).
 
 // Initializing variables 
 sum(0.0).
 weightSum(0.0).
-threshold(0.8).
+dMax(0).
 
 // Initialize program 
 !getnames().
@@ -54,51 +37,43 @@ threshold(0.8).
 +!init(Agent) =>
     for (X in principle(Agent, X, P)) {
         !distanceSum(Agent,X);
+        !distanceMax(Agent,1);
     };
-    for (W in weight(X, W)) {
-        !distanceWeight(Agent,W);
-    };
+
     !normalizedDistance(Agent).
 
-// Calulate weighted sum of distance 
+// Calulate sum of distance 
 +!distanceSum(Agent, X) :
     principle(Agent, X, P) &&
     intention(Agent, X, I) &&
-    weight(X, W) &&
     sum(CurrentSum) &&
-    D is W*(((P-I))**2) &&
+    D is (((P-I))**2) &&
     NewSum is CurrentSum + D =>
 
     // Updating sum in belief-base
     -sum(CurrentSum);
     +sum(NewSum);
 
-// Calculate sum of weights 
-+!distanceWeight(Agent, W):
-    weightSum(CurrentSumWeight) &&
-    NewSumWeight is CurrentSumWeight + W =>
+// Calculate max distance 
++!distanceMax(Agent, M):
+    dMax(CurrentDMax) &&
+    NewCurrentDMax is CurrentDMax + M =>
 
     // Updating sum in belief-base
-    -weightSum(CurrentSumWeight);
-    +weightSum(NewSumWeight).
+    -dMax(CurrentDMax);
+    +dMax(NewCurrentDMax);
 
 // Calculate normalized distance 
 +!normalizedDistance(Agent) :
-    sum(Dw) &&
-    threshold(T) &&
-    weightSum(Dmax) => 
+    sum(D) && 
+    dMax(M)=> 
 
     // Taking square root and invert distance 
-    Alpha = (1 - (#nl.uva.sqrt.RootCalculator.calculateRoot(Dw,2) / #nl.uva.sqrt.RootCalculator.calculateRoot(Dmax,2)));
-
-    if (Alpha > T) {
-        #println("The perceived integrity of " + Agent + " is: " + Alpha + ". And is thus integer.");
-    } else {
-        #println("The perceived integrity of " + Agent + " is: " + Alpha + ". And is thus not integer.");
-    };
+    Alpha = (1 - (#nl.uva.sqrt.RootCalculator.calculateRoot(D,2) / M));
+    #println("The perceived integrity of " + Agent + " is: " + Alpha + ".");
 
     // Resetting belief base
     -sum(X);
-    -weightSum(Dmax);
-    +sum(0.0);
-    +weightSum(0.0).
+    -dMax(M);
+    +dMax(0);
+    +sum(0.0).
